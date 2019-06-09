@@ -19,7 +19,7 @@ Step-2: After successful installation of ```npm``` and ```node```, user needs to
  
 # List of Tools and Technology used
 1. Angular.js <br />
-2. jQuery <br />
+2. passport.js
 3. MongoDB <br />
 4. Express Framework <br />
 5. HTML <br />
