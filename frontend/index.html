@@ -3,105 +3,54 @@
     <title>hr management</title>
     <!--cdn and node modules-->
 
-    <script src="/node_modules/angular/angular.min.js"></script>
-    <script src="node_modules/ui-bootstrap4/dist/ui-bootstrap-tpls.js"></script>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/ui-bootstrap4/dist/ui-bootstrap-tpls.js"></script>
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script src="app/controllers/growl-alternative.js"></script>
 
     <!--<script src="./app/config.js"></script>-->
-    <!--<script src="./app/app.js"></script>-->
-    <!--&lt;!&ndash;controllers&ndash;&gt;-->
-    <!--<script src="./app/controller/login.js"></script>-->
-    <!--<script src="./app/controller/attendance.js"></script>-->
-    <!--<script src="./app/controller/designations.js"></script>-->
-    <!--<script src="./app/controller/employeeRegistration.js"></script>-->
-    <!--<script src="./app/controller/reports.js"></script>-->
-    <!--<script src="./app/controller/salaryComponents.js"></script>-->
-    <!--<script src="./app/controller/workingShifts.js"></script>-->
-    <!--<script src="./app/controller/createShifts.js"></script>-->
-    <!--<script src="./app/controller/signup.js"></script>-->
-    <!--<script src="./app/controller/employeeSetting.js"></script>-->
-    <!--<script src="./app/controller/createAdmin.js"></script>-->
-    <!--<script src="./app/controller/rootPage.js"></script>-->
-    <!--<script src="./app/controller/updatePassword.js"></script>-->
-    <!--<script src="app/controller/forum.js"></script>-->
-    <!--&lt;!&ndash;<script src="./app/controlller/user-report.js"></script>&ndash;&gt;-->
+    <script src="app/app.js"></script>
 
+    <!--controllers-->
+    <script src="app/controllers/comment.js"></script>
+    <script src="app/controllers/userRegister.js"></script>
 
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>-->
-    <!--<script src="app/controller/growl-alternative.js"></script>-->
+    <!--services-->
+    <script src="app/services/commentService.js"></script>
+    <script src="app/services/userService.js"></script>
 
-    <!--&lt;!&ndash;services&ndash;&gt;-->
-    <!--<script src="app/services/salaryComponentService.js"></script>-->
-    <!--<script src="app/services/designationService.js"></script>-->
-    <!--<script src="app/services/workingShiftService.js"></script>-->
-    <!--<script src="app/services/createShiftService.js"></script>-->
-    <!--<script src="app/services/employeeService.js"></script>-->
-    <!--<script src="app/services/attendanceService.js"></script>-->
-    <!--<script src="app/services/forumService.js"></script>-->
-    <!--<script src="app/services/socketService.js"></script>-->
-    <!--&lt;!&ndash;<script src="../node_modules/angular/angular.js"></script>&ndash;&gt;-->
-    <!--<link rel="stylesheet" href="app/stylesheet/main.css">-->
+    <link rel="stylesheet" href="./app/stylesheets/main.css">
+
+    <base href="/">
 </head>
-<!--ng-app="myApp" ng-controller="mainCtrl"-->
-<body>
-<!--<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">-->
-    <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-        <!--<ul class="navbar-nav mr-auto">-->
-            <!--<li ng-if="!containsUser" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="index">Login</a>-->
-            <!--</li>-->
-            <!--&lt;!&ndash;<li ng-if="!containsUser" class="nav-item">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a class="nav-link" ui-sref="signup">Signup</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--<li ng-if="containsUser&&isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="salary-component">Salary Component</a>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser&&isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="designation">Designation</a>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser&&isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="create-shifts">Create shifts</a>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser&&isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="working-shifts">Working Shifts</a>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser&&isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="employee-registration">Employee Registration</a>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser&&!isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="attendance">Attendance</a>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser&&isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="reports">Reports</a>-->
-            <!--</li>-->
-        <!--</ul>-->
-        <!--<ul class="navbar-nav ml-auto">-->
-            <!--<li ng-if="containsUser&&!isAdmin" uib-dropdown on-toggle="toggled(open)" class="mb-2">-->
-                <!--<a class="nav-link" style="cursor: pointer" ng-click="checkNotification()" id="simple-dropdown" uib-dropdown-toggle >-->
-                    <!--<i class="far fa-bell fa-md"></i></a>-->
-                <!--<div class="dropdown-menu" style="right: 0px;left:auto" uib-dropdown-menu aria-labelledby="simple-dropdown">-->
-                    <!--<div class="beeperNub"></div>-->
-                    <!--<a href ng-repeat="notif in notificationItems" class="dropdown-item">-->
-                                <!--<span ng-click="open(notif)">-->
-                                    <!--{{notif.message}}-->
-                                <!--</span>-->
-                    <!--</a>-->
-                <!--</div>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser&&isAdmin" class="nav-item">-->
-                <!--<a class="nav-link" ui-sref="forum">Forum</a>-->
-            <!--</li>-->
-            <!--<li ng-if="containsUser" class="nav-item" style="cursor: pointer">-->
-                <!--<a class="nav-link" ng-click="logout()">logout</a>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
-<!--</nav>-->
-<!--<ui-view></ui-view>-->
+
+<body ng-app="myApp" ng-controller="mainCtrl">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="signIn" ng-if="!containsUser">Signin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="signUp" ng-if="!containsUser">Signup</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" ng-if="containsUser">
+                    <a class="nav-link" ui-sref="forum">Forum</a>
+                </li>
+                <li class="nav-item" style="cursor: pointer" ng-if="containsUser">
+                    <a class="nav-link" ng-click="logout()">logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div ui-view></div>
 </body>
 </html>

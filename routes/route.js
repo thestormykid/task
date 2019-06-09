@@ -1,18 +1,27 @@
 var express = require('express');
 var router  = express.Router();
 
+var passport = require('passport');
+
+const passportSignIn = passport.authenticate('local', { session: false });
+const passportJWT = passport.authenticate('jwt', { session: false });
+
 
 var routes = {
     views: {
         comment: require('./views/comment'),
-        index: require('./views/index')
+        user: require('./views/user')
     }
 }
 
+// user signup
+router.post('/api/addUser', routes.views.user.addUser);
+router.post('/api/loginUser', passportSignIn, routes.views.user.loginUser);
 
-router.get('/getAllComments', routes.views.comment.getAllComments);
-router.post('/addComment', routes.views.comment.addComment);
-router.post('/upvot', routes.views.comment.upvote);
-router.post('/downvote', routes.views.comment.downvote);
+// comments
+router.get('/api/getAllComment', passportJWT, routes.views.comment.getAllComments);
+router.post('/api/addComment', passportJWT, routes.views.comment.addComment);
+router.post('/api/upvote', passportJWT, routes.views.comment.upvote);
+router.post('/api/downvote', passportJWT, routes.views.comment.downvote);
 
 module.exports = router;

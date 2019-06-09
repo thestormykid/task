@@ -1,11 +1,13 @@
-var Comment = require('../../model/comment');
-var mongoose = require('mongoose');
+var Comment     = require('../../model/comment');
+var mongoose    = require('mongoose');
+var ObjectId 	= require('mongodb').ObjectID;
+
 
 
 module.exports = {
 
     getAllComments: function(req, res) {
-        comments.find({}, function(err, allComments) {
+        Comment.find({}).populate('userDetails', {name: 1}).exec(function(err, allComments) {
             if(err) {
                 console.log(err);
                 res.status(500).json(err);
@@ -13,30 +15,31 @@ module.exports = {
             }
 
             res.status(200).json(allComments)
-        });
+        })
     },
 
     addComment: function(req,res) {
-        var body= req.body.comment;
-        var nComment= {body,upvote:0,downvote:0};
+        var id = ObjectId(req.user._id);
+        var singleComment= req.body.comment;
+        singleComment.userDetails  = id;
 
-        console.log(nComment);
-        comments.create(nComment,function(err,comm) {
+        Comment.create(singleComment, function(err,comm) {
             if(err) {
                 res.status(500).json(err);
                 console.log(err);
                 return;
             }
 
-            res.status(200).json(comm);
+            return res.status(200).json(comm);
         });
     },
 
     upvote: function(req,res) {
-        var id=req.body.id;
-        var old=Number(req.body.val);
+        var id=ObjectId(req.body.comment_id);
+        var old=Number(req.body.upvote);
+        // console.log(req.body.)
 
-        comments.findByIdAndUpdate(id, {upvote : old+1 },function(err,upv) {
+        Comment.findByIdAndUpdate(id, {upvote : old+1 },function(err,upv) {
             if(err) {
                 console.log(err);
                 res.status(500).json(err);
@@ -48,19 +51,17 @@ module.exports = {
     },
 
     downvote: function(req, res) {
-        var id=req.body.id;
-        var old=Number(req.body.val);
+        var id=ObjectId(req.body.comment_id);
+        var old=Number(req.body.downvote);
 
-        comments.findByIdAndUpdate(id, {downvote : old+1 },function(err,dnv) {
+        Comment.findByIdAndUpdate(id, {downvote : old+1 },function(err,dnv) {
             if(err) {
                 console.log(err);
                 res.status(200).json(err);
                 return;
             }
 
-            res.status.json(dnv);
+            res.status(200).json(dnv);
         });
     }
-
-
 }
