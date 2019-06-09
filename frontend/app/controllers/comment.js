@@ -14,8 +14,8 @@ forum.controller('commentCtrl', ['$scope', 'commentService', function($scope, co
         commentService.addComment($scope.comment)
             .then(function (success) {
                 hulla.send('comment added successfully', 'success');
+                $scope.allComments = getAllComments();
                 resetValue();
-                // $scope.allComments = getAllComments();
 
             }, function(failure) {
                 hulla.send(failure, 'danger');
@@ -38,7 +38,7 @@ forum.controller('commentCtrl', ['$scope', 'commentService', function($scope, co
     $scope.downvote = function(comment) {
         commentService.downVote(comment._id, comment.downvote)
             .then(function (success) {
-                hulla.send('downvoted', 'success');
+                hulla.send('downvoted', 'info');
                 comment.downvote += 1;
 
             }, function (falilure) {

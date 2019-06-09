@@ -7,7 +7,10 @@ forum.config( function($stateProvider, $locationProvider) {
         .state('forum', {
             url: '/',
             templateUrl: 'app/templates/comment.html',
-            controller: 'commentCtrl'
+            controller: 'commentCtrl',
+            resolve: {
+                redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+            }
         })
         .state('signIn', {
             url: '/signIn',
@@ -19,7 +22,32 @@ forum.config( function($stateProvider, $locationProvider) {
             templateUrl: 'app/templates/signup.html',
             controller: 'userRegisterCtrl'
         })
+}).run(function($rootScope, $location, $state) {
+    $state.defaultErrorHandler(function(error) {
+        // This is a naive example of how to silence the default error handler.
+        console.log(error);
+    });
 })
+
+function _redirectIfNotAuthenticated($q, $state, $timeout) {
+    var defer = $q.defer();
+
+    var user = localStorage.getItem('token');
+
+    if(user) {
+        defer.resolve();
+
+    } else {
+        $timeout(function () {
+            $state.go('signIn');
+        });
+
+        defer.reject();
+    }
+
+    return defer.promise;
+}
+
 
 
 forum.controller('mainCtrl', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {

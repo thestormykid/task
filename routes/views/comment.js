@@ -7,7 +7,7 @@ var ObjectId 	= require('mongodb').ObjectID;
 module.exports = {
 
     getAllComments: function(req, res) {
-        Comment.find({}).populate('userDetails', {name: 1}).exec(function(err, allComments) {
+        Comment.find({}).populate('userDetails', {name: 1}).sort().exec(function(err, allComments) {
             if(err) {
                 console.log(err);
                 res.status(500).json(err);
