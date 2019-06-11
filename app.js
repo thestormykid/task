@@ -25,6 +25,6 @@ app.get('*', function(req, res) {
     res.sendFile(__dirname+'/frontend/index.html');
 })
 
-app.listen(3000, function(req, res) {
+app.listen(process.env.PORT || 3000, function(req, res) {
 	console.log('server is running at 3000');
 });
