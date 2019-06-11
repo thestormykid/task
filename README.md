@@ -1,14 +1,16 @@
 # Post Comment
-This is a one page application, just a demo for showing the counts of Upvotes and Downvotes on a Comment posted by anyone.
- 
+In this application, there are some list of features one can do
+1. User login and Sign up page
+2. User can add comments
+3. User can upvote and down vote comments, even more than one time(As in the task you didn't mentioned that upvoting and downvoting must be only 1 user per comment).
+4. the Commenting page is protected, that means that only the authentic user has the access.
+5. Routing is done by angular.js and backend is only serviing api's (RESTFUL)
 
 # Running The Demo
 Step-1: You need to install MongoDB, npm, NodeJS in your system in order to run the application. <br />
         ```npm install```  <br />
-Step-2: Follow the link to install ```npm``` and ```node``` on your local system. http://blog.teamtreehouse.com/install-node-js-npm-windows <br />
-Step-3: After successful installation of ```npm``` and ```node```, user needs to install the dependent packages that are used in the system. Dependencies in this application:<br /> ```"dependencies": {
+Step-2: After successful installation of ```npm``` and ```node```, user needs to install the dependent packages that are used in the system. Dependencies in this application:<br /> ```"dependencies": {
     "body-parser": "^1.18.2",
-    "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mongoose": "^4.13.0"
   },```<br />
@@ -16,30 +18,10 @@ Step-3: After successful installation of ```npm``` and ```node```, user needs to
  Step-4: write ```node app.js``` in ```cmd``` of your working directory. 
  
 # List of Tools and Technology used
-1. JavaScript <br />
-2. jQuery <br />
+1. Angular.js <br />
+2. passport.js
 3. MongoDB <br />
 4. Express Framework <br />
 5. HTML <br />
 6. Bootstrap <br />
 7. Font Awesome API <br />
-
-# Directory Structure
-```
-|-- rentomojo_assignment
-    |-- .gitignore
-    |-- app.js
-    |-- package-lock.json
-    |-- package.json
-    |-- README.md
-    |-- .idea
-    |   |-- encodings.xml
-    |   |-- misc.xml
-    |   |-- modules.xml
-    |   |-- rentomojo_assignment.iml
-    |   |-- vcs.xml
-    |   |-- workspace.xml
-    |-- views
-        |-- posts.ejs
-        |-- Procfile
-```
