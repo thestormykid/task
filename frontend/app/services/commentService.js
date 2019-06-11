@@ -12,7 +12,7 @@ forum.factory('commentService', ['$http', '$q', function($http, $q) {
             var promise = $q.defer();
 
             $http({
-                url: `http://localhost:3000/api/addComment`,
+                url: `/api/addComment`,
                 method: 'post',
                 headers: setHeaders(),
                 data: {
@@ -33,7 +33,7 @@ forum.factory('commentService', ['$http', '$q', function($http, $q) {
             var promise = $q.defer();
 
             $http({
-                url: `http://localhost:3000/api/getAllComment`,
+                url: `/api/getAllComment`,
                 headers: setHeaders(),
                 method: 'GET'
             }).then(function(success) {
@@ -52,7 +52,7 @@ forum.factory('commentService', ['$http', '$q', function($http, $q) {
             var promise = $q.defer();
 
             $http({
-                url: `http://localhost:3000/api/upvote`,
+                url: `/api/upvote`,
                 method: 'post',
                 headers: setHeaders(),
                 data: {
@@ -74,7 +74,7 @@ forum.factory('commentService', ['$http', '$q', function($http, $q) {
             var promise = $q.defer();
 
             $http({
-                url: `http://localhost:3000/api/downvote`,
+                url: `/api/downvote`,
                 method: 'post',
                 headers: setHeaders(),
                 data : {

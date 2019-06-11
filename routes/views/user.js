@@ -26,10 +26,13 @@ module.exports = {
 
     addUser: function (req, res) {
         console.log(req.body);
-        // console.log()?
+
         const { name, email, password } = req.body.user;
 
+        console.log('asaaaaaaaaaaaaaaaa');
+
         User.findOne({ email }, function(err, foundUser) {
+            console.log("-/564654654654");
             if (err) {
                 console.log(err);
                 res.status(500).json('internal server error');
@@ -40,14 +43,19 @@ module.exports = {
                 return res.status(200).json("exists");
             }
 
+            console.log('---------------------')
+
             var newUser = new User({name: name, email: email, password: password})
 
             newUser.save(function(err, userCreated) {
+                console.log('2222222222222222');
                 if (err) {
                     console.log(err);
                     res.status(500).json('internal server error');
                     return;
                 }
+
+                console.log('11111111111111111');
 
                 var token = signToken(newUser);
                 return res.json(token);

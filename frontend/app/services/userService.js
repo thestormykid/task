@@ -6,7 +6,7 @@ forum.factory('userService', ['$http', '$q', function($http, $q) {
             var promise = $q.defer();
 
             $http({
-                url:`http://localhost:3000/api/addUser`,
+                url:`/api/addUser`,
                 method:'POST',
                 data : {
                     user: user
@@ -27,7 +27,7 @@ forum.factory('userService', ['$http', '$q', function($http, $q) {
             var promise = $q.defer();;
 
             $http({
-                url: `http://localhost:3000/api/loginUser`,
+                url: `/api/loginUser`,
                 method: 'POST',
                 data: {
                     email: user.email,
