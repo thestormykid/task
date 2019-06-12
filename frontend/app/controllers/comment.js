@@ -5,6 +5,7 @@ forum.controller('commentCtrl', ['$scope', 'commentService', function($scope, co
         downvote: 0,
         body: ""
     };
+    $scope.user = {};
 
     $scope.allComments = [];
 
@@ -26,8 +27,17 @@ forum.controller('commentCtrl', ['$scope', 'commentService', function($scope, co
 
         commentService.upVote(comment._id, comment.upvote)
             .then(function (success) {
-                hulla.send('upvoted', 'success');
-                comment.upvote  +=  1;
+                console.log(success);
+                if (success == 'already upvoted') {
+                    hulla.send('already upvoted', 'info');
+                    return;
+
+                } else {
+                    hulla.send('upvoted', 'success');
+                    comment.upvote  +=  1;
+                    return;
+
+                }
 
                 }, function (falilure) {
                     hulla.send(failure, 'danger');
@@ -38,8 +48,15 @@ forum.controller('commentCtrl', ['$scope', 'commentService', function($scope, co
     $scope.downvote = function(comment) {
         commentService.downVote(comment._id, comment.downvote)
             .then(function (success) {
-                hulla.send('downvoted', 'info');
-                comment.downvote += 1;
+                if (success == 'already downvoted') {
+                      hulla.send('already downvoted', 'info');
+                    return;
+                } else {
+                    hulla.send('downvoted', 'success');
+                    comment.downvote += 1;
+                    return;
+
+                }
 
             }, function (falilure) {
                 hulla.send(failure, 'danger');
@@ -58,8 +75,9 @@ forum.controller('commentCtrl', ['$scope', 'commentService', function($scope, co
     function getAllComments() {
         commentService.getAllComments()
             .then(function (success) {
-                console.log(success);
-                $scope.allComments = success;
+                $scope.allComments = success.allComments;
+                $scope.user =  success.user
+                console.log($scope.user);
 
             }, function (failure) {
                 console.log(failure);

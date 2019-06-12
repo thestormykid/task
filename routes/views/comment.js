@@ -14,7 +14,7 @@ module.exports = {
                 return;
             }
 
-            res.status(200).json(allComments)
+            res.status(200).json({allComments: allComments, user: req.user})
         })
     },
 
@@ -22,6 +22,8 @@ module.exports = {
         var id = ObjectId(req.user._id);
         var singleComment= req.body.comment;
         singleComment.userDetails  = id;
+        singleComment.upvotedList = [];
+        singleComment.downvoteList = [];
 
         Comment.create(singleComment, function(err,comm) {
             if(err) {
@@ -37,31 +39,67 @@ module.exports = {
     upvote: function(req,res) {
         var id=ObjectId(req.body.comment_id);
         var old=Number(req.body.upvote);
+        var userId = ObjectId(req.user._id);
         // console.log(req.body.)
 
-        Comment.findByIdAndUpdate(id, {upvote : old+1 },function(err,upv) {
-            if(err) {
-                console.log(err);
-                res.status(500).json(err);
-                return;
-            }
 
-            res.status(200).json(upv);
-        });
+        Comment.findOne({_id: id, upvotedList: userId}, function(err, checkForUpvote) {
+            if (err) {
+                console.log(err);
+                return res.status(500).json(err);
+
+            }
+            console.log(checkForUpvote);
+            if (checkForUpvote) {
+                return res.status(200).json("already upvoted");
+
+            } else {
+                Comment.findByIdAndUpdate(id, {
+                    $push: {upvotedList: userId},
+                    upvote: old + 1,
+                }, function(err, upv) {
+                    if(err) {
+                        console.log(err);
+                        res.status(500).json(err);
+                        return;
+                    }
+
+                    res.status(200).json("upvoted successfully");
+                });
+
+            }
+        })
     },
 
     downvote: function(req, res) {
         var id=ObjectId(req.body.comment_id);
         var old=Number(req.body.downvote);
+        var userId = ObjectId(req.user._id);
 
-        Comment.findByIdAndUpdate(id, {downvote : old+1 },function(err,dnv) {
-            if(err) {
+        Comment.findOne({_id: id, downvotedList: userId}, function(err, checkFordownvote) {
+            if (err) {
                 console.log(err);
-                res.status(200).json(err);
-                return;
+                return res.status(500).json(err);
+
             }
 
-            res.status(200).json(dnv);
-        });
+            if (checkFordownvote) {
+                return res.status(200).json("already downvoted");
+
+            } else {
+                Comment.findByIdAndUpdate(id,{
+                    $push: {downvotedList: userId},
+                    downvote : old+1
+                }, function(err,dnv) {
+                    if(err) {
+                        console.log(err);
+                        res.status(200).json(err);
+                        return;
+                    }
+
+                    res.status(200).json("downvoted successfully");
+                });
+            }
+        })
     }
 }

@@ -39,23 +39,28 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <div>
+                                <div ng-if="user._id==singleComment.userDetails._id">
+                                    <i style="color: grey;" class="fas fa-thumbs-up">
+                                    </i>&nbsp;  upvotes {{singleComment.upvote}}
+                                </div>
+                                <div ng-if="user._id!=singleComment.userDetails._id">
                                     <i style="color: forestgreen; cursor: pointer" class="fas fa-thumbs-up"
                                        ng-click="upvote(singleComment)">
                                     </i>&nbsp;  upvotes {{singleComment.upvote}}
                                 </div>
-                                <div>
+                                <div ng-if="user._id==singleComment.userDetails._id">
+                                    <i style="color: grey;" class="fas fa-thumbs-down">
+                                    </i>&nbsp; downvotes {{singleComment.downvote}}
+                                </div>
+                                <div ng-if="user._id!=singleComment.userDetails._id">
                                     <i style="color: red; cursor: pointer" class="fas fa-thumbs-down"
                                        ng-click="downvote(singleComment)">
-                                    </i>&nbsp; downvotes {{singleComment.downvote}}
+                                    </i>&nbsp;  downvotes {{singleComment.downvote}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--<div class="card-header">-->
-                    <!--{{singleComment}}-->
-                <!--</div>-->
             </div>
         </div>
     </div>
